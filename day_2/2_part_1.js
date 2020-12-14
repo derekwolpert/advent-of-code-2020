@@ -3,7 +3,7 @@ const path = require('path')
 
 const parseInput = async (file) => (
   (await fs.readFile(path.resolve(__dirname, file), { encoding: 'utf-8' }))
-    .split('\n').map(password => (password.split(/(-|\s|:\s)/)))
+    .split('\n').map(password => (password.split(/-|\s|:\s/)))
 )
 
 const partOne = async (file) => {
@@ -11,10 +11,10 @@ const partOne = async (file) => {
   let valid = 0
   for (const password of passwords) {
     const min = Number(password[0])
-    const max = Number(password[2])
-    const char = password[4]
+    const max = Number(password[1])
+    const char = password[2]
     let count = 0
-    for (const el of password[6]) {
+    for (const el of password[3]) {
       if (el === char) count++
     }
     if ((count >= min) && (count <= max)) {
